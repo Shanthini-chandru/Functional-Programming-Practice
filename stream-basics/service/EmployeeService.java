@@ -15,11 +15,14 @@ import java.util.stream.Collectors;
     * Then try descending.
     * practice: sorted(), Comparator
     *
-*12. Calculate Total Salary
+* 12. Calculate Total Salary
     *  Practice: reduce()
-*11. Find the Highest Salary
+* 11. Find the Highest Salary
     * Find the maximum salary.
     * Practice: max(), Comparator, Optional
+* 13. Count Employees Above ₹50K
+    * Given employee objects, count how many employees earn more than ₹50,000.
+    * Practice: filter(), count()
 * */
 public class EmployeeService {
 
@@ -46,6 +49,14 @@ public class EmployeeService {
         return employees.stream()
                 .map(Employee::getSalary)
                 .reduce(0.0,Double::max);
+    }
+
+    //13. Count Employees Above ₹50K
+    public long countEmpSalaryRange(List<Employee > employees, double minSalary){
+        return employees.stream()
+                .filter(e->e.getSalary() > minSalary)
+                .count();
+
     }
 
 
