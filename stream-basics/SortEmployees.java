@@ -23,5 +23,9 @@ public class SortEmployees {
         System.out.println("Descending Sort of Salary");
         System.out.println("------------------------");
         empService.sortHighToLowSalary(employees).forEach(System.out::println);
+        System.out.println("Total of Salaries");
+        System.out.println("-----------------");
+        System.out.println(empService.overallSalary(employees));
+
     }
 }
