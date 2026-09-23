@@ -26,6 +26,10 @@ public class SortEmployees {
         System.out.println("Total of Salaries");
         System.out.println("-----------------");
         System.out.println(empService.overallSalary(employees));
+        System.out.println("Highest Salary");
+        System.out.println("--------------");
+        System.out.println(empService.highestSalary(employees));
+
 
     }
 }

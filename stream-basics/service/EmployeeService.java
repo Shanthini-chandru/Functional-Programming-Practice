@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
     *
 *12. Calculate Total Salary
     *  Practice: reduce()
-*
+*11. Find the Highest Salary
+    * Find the maximum salary.
+    * Practice: max(), Comparator, Optional
 * */
 public class EmployeeService {
 
@@ -37,8 +39,13 @@ public class EmployeeService {
         return employees.stream()
                 .map(Employee::getSalary)
                 .reduce(0.0,Double::sum);
+    }
 
-
+    //11. Find the Highest Salary
+    public Double highestSalary(List<Employee> employees){
+        return employees.stream()
+                .map(Employee::getSalary)
+                .reduce(0.0,Double::max);
     }
 
 
