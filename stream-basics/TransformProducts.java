@@ -1,4 +1,5 @@
 import model.Product;
+import service.GstService;
 import service.ProductService;
 
 import java.util.List;
@@ -29,6 +30,15 @@ public class TransformProducts {
         System.out.println("---------------------------");
         List<Product> affordableProducts = productService.findProductUnderPrice(products, maxPrice);
         affordableProducts.forEach(product -> System.out.println(product.getName()));
+
+        GstService gstService = new GstService();
+        System.out.println("Convert Prices: GST%");
+        System.out.println("--------------------");
+        double GST = 18;
+        List<Product> convertedPrice = gstService.applyGst(products,GST);
+        convertedPrice.forEach(System.out::println);
+
+
 
     }
 
