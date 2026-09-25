@@ -44,9 +44,14 @@ public class SortEmployees {
         empService.groupEmployeeByDepartment(employees);
         System.out.println("17. Count Employees by Department");
         empService.countByDept(employees);
+        System.out.println("18. Find Average Salary by Department");
 
-
-
+        Map<Department, Double> avgSalary = empService.avgSalaryByDept(employees);
+        for(Map.Entry<Department,Double> entry: avgSalary.entrySet()){
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+        System.out.println("Highest Paid Employee in Each Department");
+        empService.highPaidOfAllDept(employees);
 
     }
 }

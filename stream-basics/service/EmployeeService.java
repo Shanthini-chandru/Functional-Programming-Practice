@@ -37,6 +37,8 @@ import java.util.stream.Collectors;
             HR       -> 2
             Finance  -> 1
     * groupingBy() , counting()
+* Find Average Salary by Department
+* groupingBy() averagingDouble()
 * */
 public class EmployeeService {
 
@@ -116,6 +118,23 @@ public class EmployeeService {
             System.out.println(l.getKey()+" "+l.getValue());
 
         }
+
+    }
+    // 18. Find Average Salary by Department
+    public Map<Department, Double> avgSalaryByDept(List<Employee> employees){
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
+    }
+
+    //19. Highest Paid Employee in Each Department
+    public void highPaidOfAllDept(List<Employee> employees){
+         Map<Department, Optional<Employee>> highPaid = employees.stream()
+                 .collect(
+                         Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparing(Employee::getSalary)))
+                         );
+         for(Map.Entry<Department, Optional<Employee>> entry:highPaid.entrySet()){
+             System.out.println(entry.getKey()+" "+entry.getValue());
+         }
 
     }
 
