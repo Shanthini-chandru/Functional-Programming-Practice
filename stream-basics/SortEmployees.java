@@ -42,6 +42,9 @@ public class SortEmployees {
         empService.findEmployeeByStartingLetter(employees,"A");
         System.out.println("16. Group Employees by Department");
         empService.groupEmployeeByDepartment(employees);
+        System.out.println("17. Count Employees by Department");
+        empService.countByDept(employees);
+
 
 
 

@@ -32,6 +32,11 @@ import java.util.stream.Collectors;
                 sorted()
                 skip()
                 findFirst()
+* 17. Count Employees by Department
+    *   RES IT       -> 2
+            HR       -> 2
+            Finance  -> 1
+    * groupingBy() , counting()
 * */
 public class EmployeeService {
 
@@ -88,6 +93,7 @@ public class EmployeeService {
                 .forEach(System.out::println);
     }
 
+    //16. Group Employees by Department
     public void groupEmployeeByDepartment(List<Employee> employee){
         Map<Department,List<Employee>> filter = employee.stream()
 
@@ -98,7 +104,21 @@ public class EmployeeService {
         }
 
 
+
+
+
+}
+    //17. Count Employees by Department
+    public void countByDept(List<Employee> employees){
+        Map<Department, Long> deptMap = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,Collectors.counting()));
+        for(Map.Entry<Department,Long> l:deptMap.entrySet()){
+            System.out.println(l.getKey()+" "+l.getValue());
+
+        }
+
     }
+
 
 
 }
