@@ -31,8 +31,8 @@ public class SortEmployees {
         System.out.println(empService.highestSalary(employees));
         double minSalary = 50000;
         System.out.print("No of Employees Earning more than "+minSalary+" is ");
-        System.out.print(empService.countEmpSalaryRange(employees,minSalary));
-
+        System.out.println(empService.countEmpSalaryRange(employees,minSalary));
+        System.out.println("Find the second-highest distinct salary. "+empService.findSecondHightSalary(employees));
 
 
 

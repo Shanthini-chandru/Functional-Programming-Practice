@@ -5,6 +5,7 @@ import model.Employee;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,12 @@ import java.util.stream.Collectors;
 * 13. Count Employees Above ₹50K
     * Given employee objects, count how many employees earn more than ₹50,000.
     * Practice: filter(), count()
+* 14. Find 2nd Highest Salary
+    * Find the second-highest distinct salary.
+    * Practice :distinct()
+                sorted()
+                skip()
+                findFirst()
 * */
 public class EmployeeService {
 
@@ -56,6 +63,18 @@ public class EmployeeService {
         return employees.stream()
                 .filter(e->e.getSalary() > minSalary)
                 .count();
+
+    }
+
+    //14 . Find the Second-Highest Salary
+    public Optional<Double> findSecondHightSalary(List<Employee> emp){
+         return emp.stream()
+                .map(Employee::getSalary)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
+
 
     }
 
