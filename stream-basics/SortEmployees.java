@@ -13,7 +13,8 @@ public class SortEmployees {
                 new Employee("Mathi",9000),
                 new Employee("Gokul",90000),
                 new Employee("Neels",100000),
-                new Employee("Kannan",65000)
+                new Employee("Kannan",65000),
+                new Employee("Akila",65000)
         );
 
         EmployeeService empService = new EmployeeService();
@@ -33,6 +34,8 @@ public class SortEmployees {
         System.out.print("No of Employees Earning more than "+minSalary+" is ");
         System.out.println(empService.countEmpSalaryRange(employees,minSalary));
         System.out.println("Find the second-highest distinct salary. "+empService.findSecondHightSalary(employees));
+        System.out.println("15. Find Employees Whose Name Starts With \"A\"");
+        empService.findEmployeeByStartingLetter(employees,"A");
 
 
 

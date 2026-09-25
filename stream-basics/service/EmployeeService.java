@@ -78,5 +78,13 @@ public class EmployeeService {
 
     }
 
+    // 15. Find Employees Whose Name Starts With "A"
+    public void findEmployeeByStartingLetter(List<Employee> employee, String c){
+         employee.stream()
+                .filter(emp -> emp.getName().startsWith(c))
+                .map(Employee::getName)
+                .forEach(System.out::println);
+    }
+
 
 }
