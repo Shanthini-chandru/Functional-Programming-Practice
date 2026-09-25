@@ -1,10 +1,13 @@
 package service;
 
 
+import model.Department;
 import model.Employee;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -15,9 +18,27 @@ import java.util.stream.Collectors;
     * Then try descending.
     * practice: sorted(), Comparator
     *
-*12. Calculate Total Salary
+* 12. Calculate Total Salary
     *  Practice: reduce()
-*
+* 11. Find the Highest Salary
+    * Find the maximum salary.
+    * Practice: max(), Comparator, Optional
+* 13. Count Employees Above ₹50K
+    * Given employee objects, count how many employees earn more than ₹50,000.
+    * Practice: filter(), count()
+* 14. Find 2nd Highest Salary
+    * Find the second-highest distinct salary.
+    * Practice :distinct()
+                sorted()
+                skip()
+                findFirst()
+* 17. Count Employees by Department
+    *   RES IT       -> 2
+            HR       -> 2
+            Finance  -> 1
+    * groupingBy() , counting()
+* Find Average Salary by Department
+* groupingBy() averagingDouble()
 * */
 public class EmployeeService {
 
@@ -37,9 +58,86 @@ public class EmployeeService {
         return employees.stream()
                 .map(Employee::getSalary)
                 .reduce(0.0,Double::sum);
+    }
+
+    //11. Find the Highest Salary
+    public Double highestSalary(List<Employee> employees){
+        return employees.stream()
+                .map(Employee::getSalary)
+                .reduce(0.0,Double::max);
+    }
+
+    //13. Count Employees Above ₹50K
+    public long countEmpSalaryRange(List<Employee > employees, double minSalary){
+        return employees.stream()
+                .filter(e->e.getSalary() > minSalary)
+                .count();
+
+    }
+
+    //14 . Find the Second-Highest Salary
+    public Optional<Double> findSecondHightSalary(List<Employee> emp){
+         return emp.stream()
+                .map(Employee::getSalary)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
 
 
     }
+
+    // 15. Find Employees Whose Name Starts With "A"
+    public void findEmployeeByStartingLetter(List<Employee> employee, String c){
+         employee.stream()
+                .filter(emp -> emp.getName().startsWith(c))
+                .map(Employee::getName)
+                .forEach(System.out::println);
+    }
+
+    //16. Group Employees by Department
+    public void groupEmployeeByDepartment(List<Employee> employee){
+        Map<Department,List<Employee>> filter = employee.stream()
+
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+        for(Map.Entry<Department,List<Employee>> e: filter.entrySet()){
+            System.out.println(e.getKey());
+            System.out.println(e.getValue());
+        }
+
+
+
+
+
+}
+    //17. Count Employees by Department
+    public void countByDept(List<Employee> employees){
+        Map<Department, Long> deptMap = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,Collectors.counting()));
+        for(Map.Entry<Department,Long> l:deptMap.entrySet()){
+            System.out.println(l.getKey()+" "+l.getValue());
+
+        }
+
+    }
+    // 18. Find Average Salary by Department
+    public Map<Department, Double> avgSalaryByDept(List<Employee> employees){
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
+    }
+
+    //19. Highest Paid Employee in Each Department
+    public void highPaidOfAllDept(List<Employee> employees){
+         Map<Department, Optional<Employee>> highPaid = employees.stream()
+                 .collect(
+                         Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparing(Employee::getSalary)))
+                         );
+         for(Map.Entry<Department, Optional<Employee>> entry:highPaid.entrySet()){
+             System.out.println(entry.getKey()+" "+entry.getValue());
+         }
+
+    }
+
 
 
 }
