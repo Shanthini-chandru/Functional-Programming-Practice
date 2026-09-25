@@ -1,20 +1,24 @@
+import model.Department;
 import model.Employee;
 import service.EmployeeService;
 
 import java.util.List;
+import java.util.Map;
+
+import static model.Department.*;
 
 public class SortEmployees {
     static void main() {
         List<Employee> employees = List.of(
-                new Employee("Chan",80000),
-                new Employee("Vijay",90000),
-                new Employee("Geetha",10000),
-                new Employee("Sri",12000),
-                new Employee("Mathi",9000),
-                new Employee("Gokul",90000),
-                new Employee("Neels",100000),
-                new Employee("Kannan",65000),
-                new Employee("Akila",65000)
+                new Employee("Chan",80000,IT),
+                new Employee("Vijay",90000,HR),
+                new Employee("Geetha",10000,FINANCE),
+                new Employee("Sri",12000,FINANCE),
+                new Employee("Mathi",9000,IT),
+                new Employee("Gokul",90000,IT),
+                new Employee("Neels",100000,FINANCE),
+                new Employee("Kannan",65000,IT),
+                new Employee("Akila",65000,HR)
         );
 
         EmployeeService empService = new EmployeeService();
@@ -36,6 +40,9 @@ public class SortEmployees {
         System.out.println("Find the second-highest distinct salary. "+empService.findSecondHightSalary(employees));
         System.out.println("15. Find Employees Whose Name Starts With \"A\"");
         empService.findEmployeeByStartingLetter(employees,"A");
+        System.out.println("16. Group Employees by Department");
+        empService.groupEmployeeByDepartment(employees);
+
 
 
     }

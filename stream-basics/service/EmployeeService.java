@@ -1,10 +1,12 @@
 package service;
 
 
+import model.Department;
 import model.Employee;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -84,6 +86,18 @@ public class EmployeeService {
                 .filter(emp -> emp.getName().startsWith(c))
                 .map(Employee::getName)
                 .forEach(System.out::println);
+    }
+
+    public void groupEmployeeByDepartment(List<Employee> employee){
+        Map<Department,List<Employee>> filter = employee.stream()
+
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+        for(Map.Entry<Department,List<Employee>> e: filter.entrySet()){
+            System.out.println(e.getKey());
+            System.out.println(e.getValue());
+        }
+
+
     }
 
 
